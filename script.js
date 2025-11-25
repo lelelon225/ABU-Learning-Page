@@ -338,8 +338,9 @@ function normalizeAnswer(answer) {
 function checkAnswer() {
     const userAnswer = answerInput.value.trim();
     
+    // Wenn Eingabefeld leer ist, überspringe die Frage
     if (userAnswer === '') {
-        showFeedback('Bitte gib eine Antwort ein.', false);
+        skipCard();
         return;
     }
 
@@ -412,9 +413,10 @@ checkBtn.addEventListener('click', checkAnswer);
 
 skipBtn.addEventListener('click', skipCard);
 
+// Enter-Taste: Prüfen oder Überspringen (wenn leer)
 answerInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-        checkAnswer();
+        checkAnswer(); // checkAnswer() behandelt jetzt automatisch leere Eingaben
     }
 });
 
