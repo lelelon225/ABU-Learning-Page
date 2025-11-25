@@ -17,7 +17,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 600px;
+    max-width: 650px;
 }
 
 /* === Header === */
@@ -91,9 +91,9 @@ body {
 }
 
 .question {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: #1f2937;
-    line-height: 1.5;
+    line-height: 1.6;
     font-weight: 600;
 }
 
@@ -102,6 +102,61 @@ body {
     margin-bottom: 25px;
 }
 
+/* === Correct Answer Display === */
+.correct-answer-display {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px solid #f59e0b;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: none;
+    animation: fadeInScale 0.4s ease;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.correct-answer-display.show {
+    display: block;
+}
+
+.correct-answer-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #92400e;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+.correct-answer-label::before {
+    content: "💡";
+    font-size: 1.2rem;
+}
+
+.correct-answer-text {
+    font-size: 1.1rem;
+    color: #78350f;
+    font-weight: 600;
+    line-height: 1.6;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    border-left: 4px solid #f59e0b;
+}
+
+/* === Input Field === */
 .answer-input {
     width: 100%;
     padding: 16px;
@@ -280,7 +335,11 @@ body {
     }
 
     .question {
-        font-size: 1.2rem;
+        font-size: 1.15rem;
+    }
+
+    .correct-answer-text {
+        font-size: 1rem;
     }
 
     .button-group {

@@ -277,6 +277,8 @@ const quizCard = document.getElementById('quizCard');
 const completionScreen = document.getElementById('completionScreen');
 const restartBtn = document.getElementById('restartBtn');
 const statsEl = document.getElementById('stats');
+const correctAnswerDisplay = document.getElementById('correctAnswerDisplay');
+const correctAnswerText = document.getElementById('correctAnswerText');
 
 // === Initialisierung ===
 function init() {
@@ -305,6 +307,10 @@ function loadCard() {
     answerInput.className = 'answer-input';
     feedbackEl.className = 'feedback';
     feedbackEl.textContent = '';
+    
+    // Korrekte Antwort ausblenden beim Laden einer neuen Karte
+    correctAnswerDisplay.classList.remove('show');
+    correctAnswerText.textContent = '';
     
     cardNumberEl.textContent = `Karte ${currentCardIndex + 1}`;
     
@@ -344,8 +350,9 @@ function checkAnswer() {
 
     // Antworten vergleichen (nicht case-sensitive, ohne Satzzeichen)
     if (normalizeAnswer(userAnswer) === normalizeAnswer(correctAnswer)) {
-        showFeedback('✅ Richtig!', true);
+        showFeedback('✅ Richtig! Super gemacht!', true);
         answerInput.className = 'answer-input correct';
+        correctAnswerDisplay.classList.remove('show');
         
         setTimeout(() => {
             currentCardIndex++;
@@ -353,8 +360,12 @@ function checkAnswer() {
         }, 1200);
     } else {
         wrongAttempts++;
-        showFeedback(`❌ Falsch! Die richtige Antwort ist: "${correctAnswer}". Bitte gib sie korrekt ein.`, false);
+        showFeedback('❌ Falsch! Bitte gib die richtige Antwort ein, die oben angezeigt wird.', false);
         answerInput.className = 'answer-input incorrect';
+        
+        // Korrekte Antwort anzeigen
+        correctAnswerText.textContent = correctAnswer;
+        correctAnswerDisplay.classList.add('show');
     }
 }
 
@@ -371,8 +382,12 @@ function skipCard() {
     skippedCards.push(currentCard);
     wrongAttempts++;
     
-    showFeedback(`⏭️ Übersprungen! Die richtige Antwort ist: "${currentCard.answer}". Bitte gib sie ein, um fortzufahren.`, false);
+    showFeedback('⏭️ Übersprungen! Bitte gib die richtige Antwort ein, die oben angezeigt wird.', false);
     answerInput.className = 'answer-input incorrect';
+    
+    // Korrekte Antwort anzeigen
+    correctAnswerText.textContent = currentCard.answer;
+    correctAnswerDisplay.classList.add('show');
 }
 
 // === Abschluss-Bildschirm anzeigen ===
@@ -385,10 +400,10 @@ function showCompletion() {
         : 100;
     
     statsEl.innerHTML = `
-        <strong>Deine Statistik:</strong><br>
-        Gesamtversuche: ${totalAttempts}<br>
-        Fehler: ${wrongAttempts}<br>
-        Genauigkeit: ${accuracy}%
+        <strong>Deine Statistik:</strong><br><br>
+        📊 Gesamtversuche: ${totalAttempts}<br>
+        ❌ Fehler: ${wrongAttempts}<br>
+        ✅ Genauigkeit: ${accuracy}%
     `;
 }
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lern-Quiz - Karteikarten System</title>
+    <title>Lern-Quiz - Berufliche Grundbildung</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
             <div class="progress-bar">
                 <div class="progress-fill" id="progressBar"></div>
             </div>
-            <p class="progress-text" id="progressText">Frage 1 von 10</p>
+            <p class="progress-text" id="progressText">Frage 1 von 57</p>
         </header>
 
         <!-- Quiz-Karte -->
@@ -23,6 +23,12 @@
             
             <div class="question-section">
                 <h2 class="question" id="question">Frage wird geladen...</h2>
+            </div>
+
+            <!-- Korrekte Antwort anzeigen (nur bei Fehler) -->
+            <div class="correct-answer-display" id="correctAnswerDisplay">
+                <div class="correct-answer-label">Richtige Antwort:</div>
+                <div class="correct-answer-text" id="correctAnswerText"></div>
             </div>
 
             <div class="answer-section">
